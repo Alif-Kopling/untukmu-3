@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Untuk Safira</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff1f4;
+      font-family: 'Quicksand', sans-serif;
+      overflow: hidden;
+    }
+
+    .start-screen {
+      position: fixed;
+      z-index: 99;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #ffc4d6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .start-screen h2 {
+      color: white;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .start-btn {
+      padding: 10px 20px;
+      font-size: 1em;
+      background: white;
+      color: #d14d72;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .box {
+      position: relative;
+      z-index: 2;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 100px auto;
+      text-align: center;
+      border: 2px solid #ffc4d6;
+      animation: fadeIn 2s ease;
+      display: none;
+    }
+
+    h1 {
+      color: #d14d72;
+      font-size: 1.8em;
+      margin-bottom: 15px;
+    }
+
+    #typeText {
+      font-size: 1em;
+      color: #444;
+      margin-top: 10px;
+      min-height: 150px;
+      white-space: pre-wrap;
+      text-align: left;
+      line-height: 1.6;
+    }
+
+    .signature {
+      margin-top: 25px;
+      color: #d14d72;
+      font-style: italic;
+      opacity: 0;
+      animation: fadeIn 3s ease 7s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0 }
+      to { opacity: 1 }
+    }
+
+    .btn-container {
+      margin-top: 30px;
+    }
+
+    .btn {
+      background: #ff7fa0;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border-radius: 25px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #e8678d;
+    }
+
+    #message {
+      margin-top: 20px;
+      color: #c94f7c;
+      font-weight: bold;
+      font-size: 1.1em;
+      min-height: 24px;
+    }
+
+    /* Love particles */
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: fall 7s linear infinite;
+      z-index: 1;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10%) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="start-screen" id="startScreen">
+    <h2>Hai sayang, siap buka kejutan dari aku? 💖</h2>
+    <button class="start-btn" onclick="startApp()">Buka Sekarang</button>
+  </div>
+
+  <audio id="bgm" loop>
+    <source src="https://cdn.pixabay.com/audio/2023/03/02/audio_bf86ef9a4c.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="box" id="mainBox">
+    <h1>sayangg safiraaa 💗</h1>
+    <div id="typeText"></div>
+    <div class="signature">— dari akuuu, almu yg paling cintaa kamuu</div>
+
+    <div class="btn-container">
+      <button class="btn" onclick="showMessage('Peluk virtual terkirim 🤗💞')">Peluk Aku</button>
+      <button class="btn" onclick="showMessage('Mwahh~ 😘💋')">Cium Virtual</button>
+    </div>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    const text = "kamuuu tau gakk... dari sekian banyak hal di dunia ini,\nsalah satu hal yang paling bikin aku bersyukur tiap harinya tuh...\n\nyaa kamuuu, sayangg.\nkamu tuh bukan cuma sekadar pacar, kamu rumah, kamu tenang,\nkamu peluk paling hangat buat hatiku.\n\ndan aku bener-bener janji... bakal terus jaga kamu,\nsayangin kamu, dan buat kamu ngerasa cukup.\ntiap harinya, tiap detiknya.\n\nselalu kamu, safira.";
+    let i = 0;
+
+    function startApp() {
+      document.getElementById("startScreen").style.display = "none";
+      document.getElementById("mainBox").style.display = "block";
+      document.getElementById("bgm").play();
+      typeWriter();
+      for (let i = 0; i < 25; i++) {
+        createHeart();
+      }
+    }
+
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typeText").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 35);
+      }
+    }
+
+    function showMessage(msg) {
+      document.getElementById("message").innerText = msg;
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 10000);
+    }
+
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
